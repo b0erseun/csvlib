@@ -8,6 +8,9 @@ public class LocalDateTimeDeserializer implements CsvDeserializer {
 
     @Override
     public Object deserialize(Class<?> clazz, String serializedData) {
+        if(serializedData == null) {
+            return null;
+        }
         String format = "yyyy-MM-dd HH:mm:ss";
         return LocalDateTime.parse(serializedData, DateTimeFormatter.ofPattern(format));
     }

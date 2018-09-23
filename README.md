@@ -47,7 +47,7 @@ public class Person {
 
 ## custom deserializers
 You can create your own deserializers if you class has fields of types that are not handled by default.  Your deserializer needs to implement the CsvDeserializer interface.
-When values need to be deserialized, deserializers are tested one by one until a deserializer is found that can desrialize the specified type.
+When values need to be deserialized, deserializers are tested one by one until a deserializer is found that can desrialize the specified type.  Deserializers must be able to handle null values for `serializedData`
 
 an example implementation of the canDesrialize method would be `   return LocalDate.class == clazz; `
 
