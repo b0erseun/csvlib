@@ -3,7 +3,14 @@ Java library for reading csv files into POJO's
 
 The library makes use of reflection to initialize objects with the values in the csv file.  Fields, constructor parameters or setters can 
 be annotated with `@CsvColumn(<columnName>)` to indicate which column of the csv file should be used.  
-Mixed annotations are not supported, ie you cannot annote fields and constructor parameters.
+Mixed annotations are not supported, ie you cannot annote fields and constructor parameters.  The CsvReader is initialized with a file path or an inputstream.  You can also specify if the csv file contains a header row. 
+If no header row is specified the column indexes can be used.  The column indexes are 0 based.
+to use the column indexes instead of names use
+```java
+   @CsvColumn(columnIndex = <index>)
+```
+
+
 
 ## annotating fields
 Fields that are annotated cannot be declared final, but they can be declared private.  If your fields have to be final, 
