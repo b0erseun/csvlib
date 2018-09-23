@@ -22,13 +22,13 @@ public class Person {
 ```
 
 ## annotating setters
+Methods that return void and take 1 parameter can be annotated.
 
 ```java
   @CsvColumn("name")
   public void setName(String name) {
   ...
 ```
-If any other types needs to be deserialized, custom deserializers can be added in the builder.
 
 ## annotating constructors
 When using the annotation inside a constructor, all parameters have to be annotated before that constructor will be used.
