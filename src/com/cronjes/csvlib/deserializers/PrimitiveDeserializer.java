@@ -7,9 +7,10 @@ package com.cronjes.csvlib.deserializers;
 public class PrimitiveDeserializer implements CsvDeserializer {
     @Override
     public Object deserialize(Class<?> clazz, String serializedData) {
-        if (serializedData == null) {
-            return null;
-        }
+
+        //If serializedData is empty or null, initialize the primitive with the default value.
+        //Not all primitives are handled,
+
         if (boolean.class == clazz) {
             if (serializedData != null && !serializedData.isEmpty()) {
                 return Boolean.parseBoolean(serializedData);
@@ -66,6 +67,8 @@ public class PrimitiveDeserializer implements CsvDeserializer {
 
     @Override
     public boolean canDeserialize(Class<?> clazz) {
-        return clazz.isPrimitive();
+
+        return clazz.isPrimitive() && (clazz != char.class); // Not supporting char.
+
     }
 }
