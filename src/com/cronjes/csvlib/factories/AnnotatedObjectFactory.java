@@ -31,7 +31,6 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
             for (Parameter parameter : constructor.getParameters()) {
                 canUseConstructor = canUseConstructor && (parameter.getAnnotation(CsvColumn.class) != null);
             }
-
             if (canUseConstructor) return constructor;
         }
         return null;
@@ -76,7 +75,6 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
     }
 
 
-
     @Override
     public T makeObject(Map<String, String> columns) throws InstantiationException, IllegalAccessException, InvocationTargetException {
         //First contructors  we have to do contructors first since they might supply values to final fields.
@@ -90,15 +88,16 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
             instance = constructor.newInstance(parameters);
         }
 
-        if (instance == null && hasDefaultConstructor()) {
+        if (instance == null) {
             //This will always invoke the zero argument (default) constructor. If the class does not have one. Bad
             // things will happen...
-            instance = objectType.newInstance();
-        } else {
-            throw new ClassDefinitionException("The class " + objectType.getName() + " do not have any annotated " +
-                    "contructors, nor does it have a default constructor.");
-        }
+            if (!hasDefaultConstructor()) {
+                throw new ClassDefinitionException("The class " + objectType.getName() + " do not have any annotated " +
+                        "contructors, nor does it have a default constructor.");
 
+            }
+            instance = objectType.newInstance();
+        } 
         //Then Setters
         List<Method> annotetdMethods = getAnnotatedMethods(objectType.getDeclaredMethods());
 
@@ -133,7 +132,7 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
 
         //All done  return the instance
 
-        return (T)instance;
+        return (T) instance;
 
     }
 }
