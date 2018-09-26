@@ -5,9 +5,11 @@ The library makes use of reflection to initialize objects with the values in the
 be annotated with `@CsvColumn(<columnName>)` to indicate which column of the csv file should be used.  
 Mixed annotations are not supported, ie you cannot annote fields and constructor parameters.  The CsvReader is initialized with a file path or an inputstream.  You can also specify if the csv file contains a header row. 
 If no header row is specified the column indexes can be used.  The column indexes are 0 based.
-to use the column indexes instead of names use
+Example:
 ```java
    @CsvColumn(columnIndex = <index>)
+   private String name;
+   
 ```
 
 

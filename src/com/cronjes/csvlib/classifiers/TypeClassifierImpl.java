@@ -18,9 +18,8 @@ public class TypeClassifierImpl<T> implements TypeClassifier<T> {
         Field[] fields = clazz.getDeclaredFields();
         if (Arrays.asList(fields).stream()
                 .anyMatch(fld -> fld.getAnnotation(CsvColumn.class) != null)) {
-            return FactoryType.FIELD_ANNOTATED;
+            return FactoryType.ANNOTATED;
         }
-
         //Now check if there are methods that are annotated.
         Method[] methods = clazz.getMethods();
         if (Arrays.asList(methods).stream()
@@ -28,9 +27,8 @@ public class TypeClassifierImpl<T> implements TypeClassifier<T> {
         ) {
             //Maybe the check to see if the method has the Setter signature should be moved here. Something to
             // consider.
-            return FactoryType.SETTER_ANNOTATED;
+            return FactoryType.ANNOTATED;
         }
-
         //Now the constructors.  Only constructors that take parameters are considered for obvious (I hope) reasons.
         //All parameters must be annotated, also for obvious reasons.
         Constructor[] constructors = clazz.getConstructors();
@@ -42,7 +40,7 @@ public class TypeClassifierImpl<T> implements TypeClassifier<T> {
                         .allMatch(param -> param.getAnnotation(CsvColumn.class) != null)
 
                 )) {
-            return FactoryType.CONSTRUCTOR_ANNOTATED;
+            return FactoryType.ANNOTATED;
         }
 
         //All else failed, treat it as not annotated
