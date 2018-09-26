@@ -12,7 +12,7 @@ public class PersonM {
     @CsvColumn("surname")
     private String surname;
 
-    private String idNUmber;
+    private String idNumber;
 
     LocalDate dateOfBirth;
 
@@ -29,17 +29,19 @@ public class PersonM {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void  setSurname(String surname) {
         this.surname = surname;
     }
 
-    public String getIdNUmber() {
-        return idNUmber;
+    public String getIdNumber() {
+        return idNumber;
     }
 
     @CsvColumn("idnumber")
-    public void setIdNUmber(String idNUmber) {
-        this.idNUmber = idNUmber;
+    public void setIdNUmber(String idNumber)
+    {
+        this.idNumber = idNumber;
+
     }
 
     public LocalDate getDateOfBirth() {
@@ -56,7 +58,7 @@ public class PersonM {
         return "PersonM{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", idNUmber='" + idNUmber + '\'' +
+                ", idNUmber='" + idNumber + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
