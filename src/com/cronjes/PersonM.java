@@ -5,31 +5,30 @@ import com.cronjes.csvlib.annotaions.CsvColumn;
 import java.time.LocalDate;
 
 public class PersonM {
-    private String name;
 
+
+    private final String name;
+
+    @CsvColumn("surname")
     private String surname;
 
     private String idNUmber;
 
     LocalDate dateOfBirth;
 
-    public PersonM() {
+    public PersonM(@CsvColumn("name") String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    @CsvColumn("name")
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getSurname() {
         return surname;
     }
 
-    @CsvColumn("surname")
     public void setSurname(String surname) {
         this.surname = surname;
     }

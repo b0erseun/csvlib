@@ -51,7 +51,7 @@ public class CsvReader<T> {
     }
 
     private void initObjectFactory() {
-        this.objectFactory = factoryCreator.createObjectFactory(this.objectType, this.deserializers);
+        this.objectFactory = factoryCreator.createObjectFactory(objectType, deserializers);
     }
 
     public InputStream getInputStream() {

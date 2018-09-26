@@ -11,9 +11,7 @@ public class ObjectFactoryCreator<T> {
         FactoryType factoryType = new TypeClassifierImpl().classify(clazz);
 
         switch (factoryType) {
-            case CONSTRUCTOR_ANNOTATED: return new ConstructorInjectedObjectFactory<>(clazz, deserializers);
-            case FIELD_ANNOTATED: return new FieldInjectedObjectFactory<>(clazz, deserializers);
-            case SETTER_ANNOTATED: return new MethodInjectedObjectFactory<>(clazz, deserializers);
+            case ANNOTATED: return new AnnotatedObjectFactory<>(clazz, deserializers );
             default: return new NotAnnotatedObjectFactory<>(clazz, deserializers);
         }
 

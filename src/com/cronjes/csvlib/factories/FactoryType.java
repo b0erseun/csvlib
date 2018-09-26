@@ -1,8 +1,6 @@
 package com.cronjes.csvlib.factories;
 
 public enum FactoryType {
-    CONSTRUCTOR_ANNOTATED,
-    FIELD_ANNOTATED,
-    SETTER_ANNOTATED,
+    ANNOTATED,
     NOT_ANNOTATED;
 }
