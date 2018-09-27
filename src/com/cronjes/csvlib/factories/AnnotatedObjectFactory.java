@@ -89,7 +89,7 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
         }
 
         if (instance == null) {
-            //This will always invoke the zero argument (default) constructor. If the class does not have one. Bad
+            //This will always invoke the zero argument (default) constructor. If the class does not have one, bad
             // things will happen...
             if (!hasDefaultConstructor()) {
                 throw new ClassDefinitionException("The class " + objectType.getName() + " do not have any annotated " +
@@ -99,10 +99,10 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
             instance = objectType.newInstance();
         } 
         //Then Setters
-        List<Method> annotetdMethods = getAnnotatedMethods(objectType.getDeclaredMethods());
+        List<Method> annotatedMethods = getAnnotatedMethods(objectType.getDeclaredMethods());
 
         final Object obj = instance;
-        annotetdMethods.forEach(method -> {
+        annotatedMethods.forEach(method -> {
             String columnName = getColumnNameFromAnnoation(method);
             Class<?> paramType = method.getParameters()[0].getType();
             Optional<CsvDeserializer> deserializer = findDeserializer(paramType);
@@ -116,8 +116,8 @@ public class AnnotatedObjectFactory<T> extends ObjectFactory<T> {
         });
 
         //Then fields
-        List<Field> annotaedFields = getAnnotatedFields();
-        annotaedFields.forEach(field -> {
+        List<Field> annotatedFields = getAnnotatedFields();
+        annotatedFields.forEach(field -> {
             field.setAccessible(true);
             Optional<CsvDeserializer> deserializer = findDeserializer(field.getType());
             if (deserializer.isPresent()) {
